@@ -1,44 +1,58 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/leaflet.css">
-        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <style>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css/leaflet.css">
+    <link rel="stylesheet" href="css/qgis2web.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <style>
         #map {
             width: 435px;
             height: 683px;
         }
-        </style>
-        <title></title>
-    </head>
-    <body>
-        <div id="map">
-        </div>
-        <script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script>
-        <script src="js/leaflet.rotatedMarker.js"></script>
-        <script src="js/leaflet.pattern.js"></script>
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-        <script src="js/rbush.min.js"></script>
-        <script src="js/labelgun.min.js"></script>
-        <script src="js/labels.js"></script>
-        <script src="data/Municipal_Boundaries_1.js"></script>
-        <script src="data/PitBull_2.js"></script>
-        <script src="data/Beagle_3.js"></script>
-        <script>
+    </style>
+    <title></title>
+</head>
+
+<body>
+    <div id="map">
+    </div>
+    <script src="js/qgis2web_expressions.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.rotatedMarker.js"></script>
+    <script src="js/leaflet.pattern.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+    <script src="data/Municipal_Boundaries_1.js"></script>
+    <script src="data/PitBull_2.js"></script>
+    <script src="data/Beagle_3.js"></script>
+    <script>
         var map = L.map('map', {
-            zoomControl:true, maxZoom:19, minZoom:1
-        }).fitBounds([[42.66264244500833,-88.20317542857136],[43.375003579697776,-87.75023508889363]]);
+            zoomControl: true,
+            maxZoom: 19,
+            minZoom: 1
+        }).fitBounds([
+            [42.66264244500833, -88.20317542857136],
+            [43.375003579697776, -87.75023508889363]
+        ]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var autolinker = new Autolinker({
+            truncate: {
+                length: 30,
+                location: 'smart'
+            }
+        });
         var bounds_group = new L.featureGroup([]);
+
         function setBounds() {
             map.setMaxBounds(map.getBounds());
         }
@@ -55,6 +69,7 @@
         });
         layer_StamenTonerLite_0;
         map.addLayer(layer_StamenTonerLite_0);
+
         function pop_Municipal_Boundaries_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -88,7 +103,9 @@
                         <td colspan="2">' + (feature.properties['SHAPESTArea'] !== null ? autolinker.link(feature.properties['SHAPESTArea'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {
+                maxHeight: 400
+            });
         }
 
         function style_Municipal_Boundaries_1_0() {
@@ -99,7 +116,7 @@
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 4.0, 
+                weight: 4.0,
                 fillOpacity: 0,
                 interactive: false,
             }
@@ -118,6 +135,7 @@
         });
         bounds_group.addLayer(layer_Municipal_Boundaries_1);
         map.addLayer(layer_Municipal_Boundaries_1);
+
         function pop_PitBull_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -199,7 +217,9 @@
                         <td colspan="2">' + (feature.properties['code_qual2'] !== null ? autolinker.link(feature.properties['code_qual2'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {
+                maxHeight: 400
+            });
         }
 
         function style_PitBull_2_0() {
@@ -228,7 +248,7 @@
             layerName: 'layer_PitBull_2',
             pane: 'pane_PitBull_2',
             onEachFeature: pop_PitBull_2,
-            pointToLayer: function (feature, latlng) {
+            pointToLayer: function(feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
@@ -238,6 +258,7 @@
         });
         bounds_group.addLayer(layer_PitBull_2);
         map.addLayer(layer_PitBull_2);
+
         function pop_Beagle_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -319,7 +340,9 @@
                         <td colspan="2">' + (feature.properties['code_qual2'] !== null ? autolinker.link(feature.properties['code_qual2'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {
+                maxHeight: 400
+            });
         }
 
         function style_Beagle_3_0() {
@@ -348,7 +371,7 @@
             layerName: 'layer_Beagle_3',
             pane: 'pane_Beagle_3',
             onEachFeature: pop_Beagle_3,
-            pointToLayer: function (feature, latlng) {
+            pointToLayer: function(feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
@@ -359,8 +382,16 @@
         bounds_group.addLayer(layer_Beagle_3);
         map.addLayer(layer_Beagle_3);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Beagle_3.png" /> Beagle': layer_Beagle_3,'<img src="legend/PitBull_2.png" /> Pit Bull': layer_PitBull_2,'<img src="legend/Municipal_Boundaries_1.png" /> Municipal_Boundaries': layer_Municipal_Boundaries_1,"Stamen Toner Lite": layer_StamenTonerLite_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps, {
+            '<img src="legend/Beagle_3.png" /> Beagle': layer_Beagle_3,
+            '<img src="legend/PitBull_2.png" /> Pit Bull': layer_PitBull_2,
+            '<img src="legend/Municipal_Boundaries_1.png" /> Municipal_Boundaries': layer_Municipal_Boundaries_1,
+            "Stamen Toner Lite": layer_StamenTonerLite_0,
+        }, {
+            collapsed: false
+        }).addTo(map);
         setBounds();
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>
